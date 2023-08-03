@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<title>Productos</title>
+</head>
+<body>
+	<h1>Listado de Productos</h1>  
+        <table class="table table-dark table-striped table-hover">
+            <tr>
+                <th style="width:  50px;">ID</th>
+                <th style="width: 150px;">CLAVE</th>
+                <th style="width: 250px;">Nombre</th>
+                <th style="width: 150px;">Precio</th>
+                <th style="width: 150px;">Existencia</th>
+                <th style="width: 150px;">Faltante</th>
+                <th style="width: 150px;">Vendidos</th>
+            </tr>
+                <tr th:each ="product,iterStat : ${productList}">
+                    <td th:text="${product.getId_Prod()}"></td>
+                    <td th:text="${product.getCve_Prod()}"></td>
+                    <td th:text="${product.getNom_Prod()}"></td>
+                    <td th:text="${product.getPre_Prod()}"></td>
+                    <td th:text="${product.getInv_exi_Prod()}"></td>
+                    <td th:text="${product.getInv_fal_Prod()}"></td>
+                    <td th:text="${product.getProd_tot_Ven()}"></td>
+                </tr>
+            </th:forEach>
+        </table>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
