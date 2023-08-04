@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,8 +7,10 @@
 </head>
 <body>
 	<h1>Listado de Productos</h1>  
+	<a class="btn btn-primary btn-lg" href="/views/productos/frmCrear" role="button">Producto Nuevo</a>
         <table class="table table-dark table-striped table-hover">
             <tr>
+                <th style="width: 150px;">Imagen</th>
                 <th style="width:  50px;">ID</th>
                 <th style="width: 150px;">CLAVE</th>
                 <th style="width: 250px;">Nombre</th>
@@ -17,15 +18,21 @@
                 <th style="width: 150px;">Existencia</th>
                 <th style="width: 150px;">Faltante</th>
                 <th style="width: 150px;">Vendidos</th>
+               
             </tr>
                 <tr th:each ="product,iterStat : ${productList}">
+                	
+                	<td>
+                		<img th:src="@{/images/Productos/{img} (img=${product.getUrl_nom_Img()})}" width="136" height="136">
+                	</td>
                     <td th:text="${product.getId_Prod()}"></td>
                     <td th:text="${product.getCve_Prod()}"></td>
                     <td th:text="${product.getNom_Prod()}"></td>
                     <td th:text="${product.getPre_Prod()}"></td>
                     <td th:text="${product.getInv_exi_Prod()}"></td>
-                    <td th:text="${product.getInv_fal_Prod()}"></td>
+                    <td th:text="${product.getInv_stock_Prod()}"></td>
                     <td th:text="${product.getProd_tot_Ven()}"></td>
+                    
                 </tr>
             </th:forEach>
         </table>
