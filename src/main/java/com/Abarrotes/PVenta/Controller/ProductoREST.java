@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,42 +13,38 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Abarrotes.PVenta.Beans.Producto;
-import com.Abarrotes.PVenta.repository.ProductoRepository;
+import com.Abarrotes.PVenta.Services.ProductoServicioImpl;
 
 @Controller
+@RequestMapping("/views/productos")
 public class ProductoREST 
 {
-	@Autowired(required=true)
-	ProductoRepository productoRepository;
-	
-	@GetMapping("/producto/All")
-	public List<Producto>todos()
-	{
-		return productoRepository.findAll();
-	}
-	@PostMapping("/producto/crear")
-	public Producto crear(@Param("id_Prod") int id)
-	{
-		return null;
-		
-	}
+	@Autowired
+	private ProductoServicioImpl PSI;
 	
 	@GetMapping("/")
 	public String todos(Model modelo)
 	{
-		modelo.addAttribute("productList",productoRepository.findAll());
-		for(Producto p :productoRepository.findAll())
+		modelo.addAttribute("productList",PSI.All());
+		for(Producto p :PSI.All())
 		{
 			System.out.println(p.toString());
 		}
-		return "Login";
+		return "/views/productos/listar";
 	}
-	@PostMapping("/crear")
+	@GetMapping("/VCrear")
+	public String vistaCrear()
+	{
+		return "/views/productos/frmCrear";
+	}
+	
+	/*@PostMapping("/crear")
 	public String guardar(@Validated @ModelAttribute Producto producto,BindingResult result,
 			Model model, @RequestParam("file") MultipartFile imagen, RedirectAttributes attribute)
 	{
@@ -59,7 +53,7 @@ public class ProductoREST
 			model.addAttribute("titulo","Formulario: Nuevo Producto");
 			model.addAttribute("producto",producto);
 			attribute.addFlashAttribute("warning","Existieron errores en el formulario");
-			return "/views/productos/frmCrear";
+			return "frmCrear";
 		}
 		if(!imagen.isEmpty())
 		{
@@ -81,6 +75,6 @@ public class ProductoREST
 		attribute.addFlashAttribute("success", "producto guardado con exito!");
 		return "redirect:/views/productos/";
 		
-	}
+	}*/
 
 }
