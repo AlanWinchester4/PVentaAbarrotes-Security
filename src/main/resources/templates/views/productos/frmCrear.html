@@ -57,35 +57,35 @@
 	</div>
 	<div class="container">
 		<div class="card bg-light">
-			<div class="card-head bg-dark text-white" th:text="titulo"></div>
+			<div class="card-head bg-dark text-white" th:text="${titulo}"></div>
 			<div class="card-body">
 
 				<form action="">
 					<div class="mb-3 row">
 						<label for="ID" class="col-sm-2 col-form-label">ID:</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control " id="ID">
+						<div class="col-sm-3">
+							<input type="text" class="form-control " id="ID" placeholder="ID DEL PRODUCTO">
 						</div>
 					</div>
 					<div class="mb-3 row">
 						<label for="clave" class="col-sm-2 col-form-label">CLAVE:</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="clave">
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="clave" placeholder="CLAVE DEL PRODUCTO">
 						</div>
 					</div>
 					<div class="mb-3 row">
 						<label for="nombre" class="col-sm-2 col-form-label">NOMBRE:</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" id="nombre">
+							<input type="text" class="form-control" id="nombre" placeholder="NOMBRE DEL PRODUCTO">
 						</div>
 					</div>
 					<div class="mb-3 row">
 						<label for="precio" class="col-sm-2 col-form-label">PRECIO:</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="precio">
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="precio" placeholder="PRECIO DEL PRODUCTO">
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<!-- <div class="mb-3 row">
 						<label for="existencias" class="col-sm-2 col-form-label">EXISTENCIAS:</label>
 						<div class="col-sm-2">
 							<input type="text" class="form-control" id="existencias">
@@ -96,13 +96,13 @@
 						<div class="col-sm-2">
 							<input type="text" class="form-control" id="necesarias">
 						</div>
-					</div>
+					</div> -->
 
 					<div class="mb-3 row">
 						<label for="proveedor" class="col-sm-2 col-form-label">PROVEEDOR:</label>
-						<div class="col-sm-2">
-							<select th:field="*{proveedor}"
-								class="form-control form-control-sm col-md-6" id="ciudad">
+						<div class="col-sm-3">
+							<select class="form-control form-control-sm col-md-6" id="ciudad">
+								<option th:value="${seleccionar}"th:text="${seleccionar}"></option>
 								<option th:each="p: ${proveedoresList}"
 									th:value="${p.getId_Prov()}" th:text="${p.getNom_Prov()}" />
 							</select>

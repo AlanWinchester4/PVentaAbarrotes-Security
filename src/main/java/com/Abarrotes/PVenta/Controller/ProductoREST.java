@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.Abarrotes.PVenta.Beans.Producto;
-import com.Abarrotes.PVenta.Beans.Proveedores;
 import com.Abarrotes.PVenta.Services.ProductoServicioImpl;
-import com.Abarrotes.PVenta.Services.ProveedoresServicio;
 import com.Abarrotes.PVenta.Services.ProveedoresServicioImpl;
 
 @Controller
@@ -36,17 +33,13 @@ public class ProductoREST
 	public String todos(Model modelo)
 	{
 		modelo.addAttribute("productList",PRODSI.All());
-		for(Producto p :PRODSI.All())
-		{
-			System.out.println(p.toString());
-		}
 		return "/views/productos/listar";
 	}
 	@GetMapping("/VCrear")
 	public String vistaCrear(Model modelo)
 	{
-		//List<Proveedores> LP = PROVSI.All();
-		modelo.addAttribute("proveedor","Seleccionar");
+		modelo.addAttribute("titulo","Formulario: Producto Nuevo");
+		modelo.addAttribute("seleccionar","Sin Proveedor");
 		modelo.addAttribute("proveedoresList",PROVSI.All());
 		return "/views/productos/frmCrear";
 	}
