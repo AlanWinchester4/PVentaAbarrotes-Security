@@ -10,13 +10,15 @@ import com.Abarrotes.PVenta.repository.ProductoRepository;
 @Service
 public class ProductoServicioImpl implements ProductoServicio
 {
+	
 	@Autowired
 	private ProductoRepository PR;
+	
 
 	@Override
 	public List<Producto> All() 
 	{
-		return (List<Producto>) PR.findAll();
+		return PR.findAll();
 	}
 
 	@Override
@@ -37,4 +39,5 @@ public class ProductoServicioImpl implements ProductoServicio
 		PR.delete(producto);
 	}
 
+	
 }

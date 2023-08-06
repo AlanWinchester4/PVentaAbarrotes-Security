@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,28 +18,36 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Abarrotes.PVenta.Beans.Producto;
+import com.Abarrotes.PVenta.Beans.Proveedores;
 import com.Abarrotes.PVenta.Services.ProductoServicioImpl;
+import com.Abarrotes.PVenta.Services.ProveedoresServicio;
+import com.Abarrotes.PVenta.Services.ProveedoresServicioImpl;
 
 @Controller
 @RequestMapping("/views/productos")
 public class ProductoREST 
 {
 	@Autowired
-	private ProductoServicioImpl PSI;
+	private ProductoServicioImpl PRODSI;
+	@Autowired
+	private ProveedoresServicioImpl PROVSI;
 	
 	@GetMapping("/")
 	public String todos(Model modelo)
 	{
-		modelo.addAttribute("productList",PSI.All());
-		for(Producto p :PSI.All())
+		modelo.addAttribute("productList",PRODSI.All());
+		for(Producto p :PRODSI.All())
 		{
 			System.out.println(p.toString());
 		}
 		return "/views/productos/listar";
 	}
 	@GetMapping("/VCrear")
-	public String vistaCrear()
+	public String vistaCrear(Model modelo)
 	{
+		//List<Proveedores> LP = PROVSI.All();
+		modelo.addAttribute("proveedor","Seleccionar");
+		modelo.addAttribute("proveedoresList",PROVSI.All());
 		return "/views/productos/frmCrear";
 	}
 	
