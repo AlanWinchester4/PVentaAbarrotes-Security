@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Abarrotes.PVenta.Beans.Producto;
 import com.Abarrotes.PVenta.Services.ProductoServicioImpl;
-import com.Abarrotes.PVenta.Services.ProveedoresServicioImpl;
+import com.Abarrotes.PVenta.Services.ProveedorServicioImpl;
 
 @Controller
 @RequestMapping("/views/productos")
@@ -27,7 +28,7 @@ public class ProductoREST
 	@Autowired
 	private ProductoServicioImpl PRODSI;
 	@Autowired
-	private ProveedoresServicioImpl PROVSI;
+	private ProveedorServicioImpl PROVSI;
 	
 	@GetMapping("/")
 	public String todos(Model modelo)
@@ -38,10 +39,20 @@ public class ProductoREST
 	@GetMapping("/VCrear")
 	public String vistaCrear(Model modelo)
 	{
+		Producto p =new Producto();
 		modelo.addAttribute("titulo","Formulario: Producto Nuevo");
 		modelo.addAttribute("seleccionar","Sin Proveedor");
+		modelo.addAttribute("id","");
+		modelo.addAttribute("producto",p);
 		modelo.addAttribute("proveedoresList",PROVSI.All());
 		return "/views/productos/frmCrear";
+	}
+	@PostMapping("/save")
+	public String guardar(@ModelAttribute("producto") Producto producto)
+	{
+		PRODSI.save(producto);
+		System.out.println("cliente guardado con exito");
+		return "redirect:/views/productos/";
 	}
 	
 	/*@PostMapping("/crear")

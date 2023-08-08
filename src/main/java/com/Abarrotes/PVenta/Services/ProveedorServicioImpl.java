@@ -5,35 +5,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Abarrotes.PVenta.Beans.Proveedores;
-import com.Abarrotes.PVenta.repository.ProveedoresRepository;
+import com.Abarrotes.PVenta.Beans.Proveedor;
+import com.Abarrotes.PVenta.repository.ProveedorRepository;
 @Service
-public class ProveedoresServicioImpl implements ProveedoresServicio
+public class ProveedorServicioImpl implements ProveedorServicio
 {
 
 	@Autowired
-	private ProveedoresRepository PR;
+	private ProveedorRepository PR;
 	
 	@Override
-	public List<Proveedores> All() 
+	public List<Proveedor> All() 
 	{
 		return PR.findAll();
 	}
 
 	@Override
-	public Proveedores findById(Integer id) 
+	public Proveedor findById(Integer id) 
 	{
 		return PR.findById(id).orElse(null);
 	}
 
 	@Override
-	public void save(Proveedores proveedores) 
+	public void save(Proveedor proveedores) 
 	{
 		PR.save(proveedores);
 	}
 
 	@Override
-	public void delete(Proveedores proveedores) 
+	public void delete(Proveedor proveedores) 
 	{	
 		PR.delete(proveedores);
 	}

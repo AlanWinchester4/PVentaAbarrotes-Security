@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-	<title>Productos</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<title>Productos</title>
 </head>
 <body>
-<nav
+	<nav
 		class="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark border-bottom border-body"
 		data-bs-theme="dark">
 		<div class="container-fluid">
@@ -20,55 +24,62 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
-					</li>
+						aria-current="page" href="#">Inicio</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> Dropdown link
-					</a>
+						data-bs-toggle="dropdown" aria-expanded="true"> Productos </a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><a class="dropdown-item" href="#">Something else
-									here</a></li>
-						</ul></li>
+							<li>
+								<a class="dropdown-item" th:href="@{/views/productos/}">Lista de Productos</a>
+							</li>
+							<li>
+								<a class="dropdown-item" th:href="@{/views/productos/VCrear}">Crear Producto</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Altas al Inventario</a>
+							</li>
+						
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<h1>Listado de Productos</h1>  
-	<a th:href="@{/views/productos/VCrear}" class="btn btn-primary btn-lg" role="button">Producto Nuevo</a>
-        <table class="table table-dark table-striped table-hover">
-            <tr>
-                <th style="width: 150px;">Imagen</th>
-                <th style="width:  50px;">ID</th>
-                <th style="width: 150px;">CLAVE</th>
-                <th style="width: 250px;">Nombre</th>
-                <th style="width: 150px;">Precio</th>
-                <th style="width: 150px;">Existencia</th>
-                <th style="width: 150px;">Stock</th>
-                <th style="width: 150px;">Vendidos</th>
-               
-            </tr>
-                <tr th:each ="product,iterStat : ${productList}">
-                	
-                	<td>
-                		<img th:src="@{/images/Productos/{img} (img=${product.getUrl_nom_Img()})}" width="136" height="136">
-                	</td>
-                    <td th:text="${product.getId_Prod()}"></td>
-                    <td th:text="${product.getCve_Prod()}"></td>
-                    <td th:text="${product.getNom_Prod()}"></td>
-                    <td th:text="${product.getPre_Prod()}"></td>
-                    <td th:text="${product.getInv_exi_Prod()}"></td>
-                    <td th:text="${product.getInv_stock_Prod()}"></td>
-                    <td th:text="${product.getProd_tot_Ven()}"></td>
-                    
-                </tr>
-            </th:forEach>
-        </table>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<div class="container">
+	<h1>Listado de Productos</h1>
+	<a th:href="@{/views/productos/VCrear}" class="btn btn-primary btn-lg"
+		role="button">Producto Nuevo</a>
+	<table class="table table-dark table-striped table-hover">
+		<tr>
+			<th style="width: 150px;">Imagen</th>
+			<th style="width: 150px;">CLAVE</th>
+			<th style="width: 250px;">Nombre</th>
+			<th style="width: 150px;">Precio</th>
+			<th style="width: 150px;">Existencia</th>
+			<th style="width: 150px;">Stock</th>
+			<th style="width: 150px;">Vendidos</th>
+			<th style="width: 150px;">Proveedor</th>
+
+		</tr>
+		<tr th:each="product,iterStat : ${productList}">
+
+			<td><img
+				th:src="@{/images/Productos/{img} (img=${product.getUrl_nom_Img()})}"
+				width="136" height="136"></td>
+			<td th:text="${product.getCve_Prod()}"></td>
+			<td th:text="${product.getNom_Prod()}"></td>
+			<td th:text="${product.getPre_Prod()}"></td>
+			<td th:text="${product.getInv_exi_Prod()}"></td>
+			<td th:text="${product.getInv_stock_Prod()}"></td>
+			<td th:text="${product.getProd_tot_Ven()}"></td>
+			<td th:text="${product.proveedor.nom_Prov}"></td>
+		</tr>
+		</th:forEach>
+	</table>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
 </body>
 </html>

@@ -24,21 +24,23 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
-					</li>
+						aria-current="page" href="#">Inicio</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> Dropdown link
-					</a>
+						data-bs-toggle="dropdown" aria-expanded="true"> Productos </a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><a class="dropdown-item" href="#">Something else
-									here</a></li>
-						</ul></li>
+							<li>
+								<a class="dropdown-item" th:href="@{/views/productos/}">Lista de Productos</a>
+							</li>
+							<li>
+								<a class="dropdown-item" th:href="@{/views/productos/VCrear}">Crear Producto</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Altas al Inventario</a>
+							</li>
+						
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -60,60 +62,57 @@
 			<div class="card-head bg-dark text-white" th:text="${titulo}"></div>
 			<div class="card-body">
 
-				<form action="">
-					<div class="mb-3 row">
-						<label for="ID" class="col-sm-2 col-form-label">ID:</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control " id="ID" placeholder="ID DEL PRODUCTO">
-						</div>
-					</div>
+				<form th:action="@{/views/productos/save}" th:object="${producto}"	method="post">
 					<div class="mb-3 row">
 						<label for="clave" class="col-sm-2 col-form-label">CLAVE:</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" id="clave" placeholder="CLAVE DEL PRODUCTO">
+							<input type="text"  class="form-control"  th:field="*{cve_Prod}"
+								id="cve_Prod" placeholder="CLAVE DEL PRODUCTO">
 						</div>
 					</div>
 					<div class="mb-3 row">
 						<label for="nombre" class="col-sm-2 col-form-label">NOMBRE:</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" id="nombre" placeholder="NOMBRE DEL PRODUCTO">
+							<input type="text" class="form-control"  th:field="*{nom_Prod}"
+								id="nom_Prod" placeholder="NOMBRE DEL PRODUCTO">
 						</div>
 					</div>
 					<div class="mb-3 row">
 						<label for="precio" class="col-sm-2 col-form-label">PRECIO:</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" id="precio" placeholder="PRECIO DEL PRODUCTO">
-						</div>
-					</div>
-					<!-- <div class="mb-3 row">
-						<label for="existencias" class="col-sm-2 col-form-label">EXISTENCIAS:</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="existencias">
+							<input type="text"class="form-control"  th:field="*{pre_Prod}"
+								id="pre_Prod" placeholder="PRECIO DEL PRODUCTO">
 						</div>
 					</div>
 					<div class="mb-3 row">
-						<label for="necesarias" class="col-sm-2 col-form-label">NECESARIAS:</label>
+						<label for="existencias" class="col-sm-2 col-form-label">EXISTENCIAS:</label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" id="necesarias">
+							<input type="text" class="form-control" id="inv_exi_Prod"  th:field="*{inv_exi_Prod}">
 						</div>
-					</div> -->
+					</div>
+					<div class="mb-3 row">
+						<label for="necesarias" class="col-sm-2 col-form-label">REQUERIDO:</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="inv_stock_Prod"  th:field="*{inv_stock_Prod}">
+						</div>
+					</div>
 
 					<div class="mb-3 row">
 						<label for="proveedor" class="col-sm-2 col-form-label">PROVEEDOR:</label>
 						<div class="col-sm-3">
-							<select class="form-control form-control-sm col-md-6" id="ciudad">
-								<option th:value="${seleccionar}"th:text="${seleccionar}"></option>
+							<select class="form-control form-control-sm col-md-6" th:field="*{id_prov_Prod}"
+								id="url_nom_img">
 								<option th:each="p: ${proveedoresList}"
 									th:value="${p.getId_Prov()}" th:text="${p.getNom_Prov()}" />
 							</select>
 						</div>
-					</div>
+					</div> 
 
 					<div class="mb-3 row">
 						<label for="imagen" class="col-sm-2 col-form-label">IMAGEN:</label>
 						<div class="col-sm-4">
-							<input type="file" class="form-control form-control-sm col-md-6"
-								id="imagen">
+							<input type="file" class="form-control form-control-sm col-md-6"  
+								id="url_nom_img">
 						</div>
 					</div>
 

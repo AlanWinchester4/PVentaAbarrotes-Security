@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +15,9 @@ public class Producto
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "id_Prod")
 	private int id_Prod;
+	@Column (name = "cve_Prod")
 	private int cve_Prod;
 	@Column (name = "nom_Prod")
 	private String nom_Prod;
@@ -23,6 +27,20 @@ public class Producto
 	private int inv_stock_Prod;
 	private int prod_tot_Ven;
 	private String url_nom_Img;
+	private int id_prov_Prod;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id_prov_Prod" ,referencedColumnName="id_Prov",insertable=false, updatable=false)
+	private Proveedor proveedor;
+	
+	
+	public Proveedor getProveedor() 
+	{
+		return proveedor;
+	}
+	public void setProveedor(Proveedor proveedor) 
+	{
+		this.proveedor = proveedor;
+	}
 	/**
 	 * @param id_Prod
 	 * @param cve_Prod
@@ -33,7 +51,7 @@ public class Producto
 	 * @param prod_tot_Ven
 	 */
 	public Producto(int id_Prod, int cve_Prod, String nom_Prod, float pre_Prod, int inv_exi_Prod, int inv_stock_Prod,
-			int prod_tot_Ven, String url_nom_Img) 
+			int prod_tot_Ven, String url_nom_Img, int id_prov_Prod) 
 	{
 		this.id_Prod = id_Prod;
 		this.cve_Prod = cve_Prod;
@@ -43,6 +61,7 @@ public class Producto
 		this.inv_stock_Prod = inv_stock_Prod;
 		this.prod_tot_Ven = prod_tot_Ven;
 		this.url_nom_Img = url_nom_Img;
+		this.id_prov_Prod = id_prov_Prod;
 	}
 	public Producto()
 	{
@@ -112,16 +131,28 @@ public class Producto
 	{
 		this.url_nom_Img = url_nom_Img;
 	}
+	public int getId_prov_Prod() 
+	{
+		return id_prov_Prod;
+	}
+	public void setId_prov_Prod(int id_prov_Prod) 
+	{
+		this.id_prov_Prod = id_prov_Prod;
+	}
 	@Override
 	public String toString() 
 	{
 		return "Producto [id_Prod=" + id_Prod + ", cve_Prod=" + cve_Prod + ", nom_Prod=" + nom_Prod + ", pre_Prod="
 				+ pre_Prod + ", inv_exi_Prod=" + inv_exi_Prod + ", inv_stock_Prod=" + inv_stock_Prod + ", prod_tot_Ven="
-				+ prod_tot_Ven + ", url_nom_Img=" + url_nom_Img + ", getId_Prod()=" + getId_Prod() + ", getCve_Prod()="
-				+ getCve_Prod() + ", getNom_Prod()=" + getNom_Prod() + ", getPre_Prod()=" + getPre_Prod()
-				+ ", getInv_exi_Prod()=" + getInv_exi_Prod() + ", getInv_stock_Prod()=" + getInv_stock_Prod()
-				+ ", getProd_tot_Ven()=" + getProd_tot_Ven() + ", getUrl_nom_Img()=" + getUrl_nom_Img() + "]";
+				+ prod_tot_Ven + ", url_nom_Img=" + url_nom_Img + ", id_prov_Prod=" + id_prov_Prod + ", getId_Prod()="
+				+ getId_Prod() + ", getCve_Prod()=" + getCve_Prod() + ", getNom_Prod()=" + getNom_Prod()
+				+ ", getPre_Prod()=" + getPre_Prod() + ", getInv_exi_Prod()=" + getInv_exi_Prod()
+				+ ", getInv_stock_Prod()=" + getInv_stock_Prod() + ", getProd_tot_Ven()=" + getProd_tot_Ven()
+				+ ", getUrl_nom_Img()=" + getUrl_nom_Img() + ", getid_prov_Prod()=" + getId_prov_Prod() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
+	
+	
 
 	
 	

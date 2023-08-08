@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "proveedores")
-public class Proveedores 
+public class Proveedor 
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Proveedores
 	 * @param dir_Prov
 	 * @param url_nom_Prov
 	 */
-	public Proveedores(int id_Prov, String nom_Prov, String tel_Prov, String dir_Prov, String url_nom_Prov) 
+	public Proveedor(int id_Prov, String nom_Prov, String tel_Prov, String dir_Prov, String url_nom_Prov) 
 	{
 		this.id_Prov = id_Prov;
 		this.nom_Prov = nom_Prov;
@@ -39,7 +39,7 @@ public class Proveedores
 		this.url_nom_Prov = url_nom_Prov;
 	}
 	
-	public Proveedores()
+	public Proveedor()
 	{
 		
 	}
@@ -48,7 +48,7 @@ public class Proveedores
 	{
 		return id_Prov;
 	}
-	public void setId(int id_Prov) 
+	public void setId_Prov(int id_Prov) 
 	{
 		this.id_Prov = id_Prov;
 	}
