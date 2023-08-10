@@ -12,6 +12,6 @@ public interface ProductoServicio
 	
 	public void save(Producto producto);
 	
-	public void delete(Producto producto);
+	public void delete(Integer id);
 	
 }

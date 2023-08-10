@@ -59,13 +59,15 @@
 			<th style="width: 150px;">Stock</th>
 			<th style="width: 150px;">Vendidos</th>
 			<th style="width: 150px;">Proveedor</th>
+			<th style="width: 150px;">Editar</th>
+			<th style="width: 150px;">Eliminar</th>
 
 		</tr>
 		<tr th:each="product,iterStat : ${productList}">
 
 			<td><img
 				th:src="@{/images/Productos/{img} (img=${product.getUrl_nom_Img()})}"
-				width="136" height="136"></td>
+				width="70" height="70"></td>
 			<td th:text="${product.getCve_Prod()}"></td>
 			<td th:text="${product.getNom_Prod()}"></td>
 			<td th:text="${product.getPre_Prod()}"></td>
@@ -73,10 +75,23 @@
 			<td th:text="${product.getInv_stock_Prod()}"></td>
 			<td th:text="${product.getProd_tot_Ven()}"></td>
 			<td th:text="${product.proveedor.nom_Prov}"></td>
+			<td><a class="btn btn-success btn-sm" th:href="@{/views/productos/edit/} + ${product.getId_Prod()}" th:text="'Editar'" title="Editar Registro"></a></td>
+			<td><a class="btn btn-danger btn-sm" th:href="@{/views/productos/delete/} + ${product.getId_Prod()}" th:text="'Eliminar'" title="Eliminar Registro" onclick="return confirm('Esta seguro de eliminar')"></a></td>
+					
 		</tr>
 		</th:forEach>
 	</table>
 	</div>
+	<footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
+
+		<div class="container">
+			<p>Copyright Alan Winchester &copy; -2023</p>
+
+		</div>
+		<script type="text/javascript"
+			th:src="@{/js//PVenta/src/main/resources/static/js/bootstrap.bundle.min.js}"></script>
+
+	</footer>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

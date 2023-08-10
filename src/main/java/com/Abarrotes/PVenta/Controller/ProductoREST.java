@@ -9,8 +9,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Abarrotes.PVenta.Beans.Producto;
 import com.Abarrotes.PVenta.Services.ProductoServicioImpl;
 import com.Abarrotes.PVenta.Services.ProveedorServicioImpl;
+
+import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping("/views/productos")
@@ -39,22 +45,55 @@ public class ProductoREST
 	@GetMapping("/VCrear")
 	public String vistaCrear(Model modelo)
 	{
-		Producto p =new Producto();
 		modelo.addAttribute("titulo","Formulario: Producto Nuevo");
-		modelo.addAttribute("seleccionar","Sin Proveedor");
-		modelo.addAttribute("id","");
-		modelo.addAttribute("producto",p);
+		modelo.addAttribute("producto",new Producto());
 		modelo.addAttribute("proveedoresList",PROVSI.All());
 		return "/views/productos/frmCrear";
 	}
 	@PostMapping("/save")
-	public String guardar(@ModelAttribute("producto") Producto producto)
+	public String guardar(@Valid @ModelAttribute("producto") Producto producto, BindingResult result, Model modelo, RedirectAttributes attribute)
 	{
+		if(result.hasErrors())
+		{
+			modelo.addAttribute("titulo","Formulario: Producto Nuevo");
+			modelo.addAttribute("producto",producto);
+			modelo.addAttribute("proveedoresList",PROVSI.All());
+			System.out.println("EXISTIERON ERRORES EN EL FORMULARIO");
+			return "/views/productos/frmCrear";
+		}
 		PRODSI.save(producto);
-		System.out.println("cliente guardado con exito");
+		System.out.println("Producto guardado con exito");
+		attribute.addFlashAttribute("success", "EL PRODUCTO SE GUARDO CORRECTAMENTE!");
 		return "redirect:/views/productos/";
 	}
 	
+	@GetMapping("/edit/{id_Prod}")
+	public String editar(@PathVariable("id_Prod") int id, Model modelo)
+	{	
+		if(PRODSI.findById(id)==null)
+		{
+			System.out.println("ERROR CON EL ID DEL PRODUCTO");
+			return "redirect:/views/productos/";
+		}
+		modelo.addAttribute("titulo","Formulario: Editar Producto");
+		modelo.addAttribute("producto",PRODSI.findById(id));
+		modelo.addAttribute("proveedoresList",PROVSI.All());
+		System.out.println("Producto editado con exito");
+		return "/views/productos/frmCrear";
+	}
+	
+	@GetMapping("/delete/{id_Prod}")
+	public String eliminar(@PathVariable("id_Prod") int id)
+	{	
+		if(PRODSI.findById(id)==null)
+		{
+			System.out.println("ERROR CON EL ID DEL PRODUCTO");
+			return "redirect:/views/productos/";
+		}
+		PRODSI.delete(id);
+		System.out.println("Producto se elimino con exito");
+		return "redirect:/views/productos/";
+	}
 	/*@PostMapping("/crear")
 	public String guardar(@Validated @ModelAttribute Producto producto,BindingResult result,
 			Model model, @RequestParam("file") MultipartFile imagen, RedirectAttributes attribute)

@@ -1,5 +1,6 @@
 package com.Abarrotes.PVenta.Beans;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "producto")
@@ -18,15 +22,25 @@ public class Producto
 	@Column (name = "id_Prod")
 	private int id_Prod;
 	@Column (name = "cve_Prod")
+	@NotNull
 	private int cve_Prod;
 	@Column (name = "nom_Prod")
+	@NotEmpty
 	private String nom_Prod;
 	@Column (name = "pre_Prod")
+	@NotNull
 	private float pre_Prod;
+	@Column (name = "inv_exi_Prod")
+	@NotNull
 	private int inv_exi_Prod;
+	@Column (name = "inv_stock_Prod")
+	@NotNull
 	private int inv_stock_Prod;
+	@Column (name = "prod_tot_Ven")
 	private int prod_tot_Ven;
+	@Column (name = "url_nom_Img")
 	private String url_nom_Img;
+	@Column (name = "id_prov_Prod")
 	private int id_prov_Prod;
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_prov_Prod" ,referencedColumnName="id_Prov",insertable=false, updatable=false)

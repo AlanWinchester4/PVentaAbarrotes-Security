@@ -34,9 +34,9 @@ public class ProductoServicioImpl implements ProductoServicio
 	}
 
 	@Override
-	public void delete(Producto producto) 
+	public void delete(Integer id) 
 	{
-		PR.delete(producto);
+		PR.deleteById(id);
 	}
 
 	
