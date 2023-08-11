@@ -39,7 +39,8 @@ public class ProductoREST
 	@GetMapping("/")
 	public String todos(Model modelo)
 	{
-		modelo.addAttribute("productList",PRODSI.All());
+		List<Producto> lista = PRODSI.All();
+		modelo.addAttribute("productList",lista);
 		return "/views/productos/listar";
 	}
 	@GetMapping("/VCrear")
@@ -58,40 +59,38 @@ public class ProductoREST
 			modelo.addAttribute("titulo","Formulario: Producto Nuevo");
 			modelo.addAttribute("producto",producto);
 			modelo.addAttribute("proveedoresList",PROVSI.All());
-			System.out.println("EXISTIERON ERRORES EN EL FORMULARIO");
+			attribute.addFlashAttribute("success", "EL PRODUCTO SE GUARDO CORRECTAMENTE!");
 			return "/views/productos/frmCrear";
 		}
 		PRODSI.save(producto);
-		System.out.println("Producto guardado con exito");
 		attribute.addFlashAttribute("success", "EL PRODUCTO SE GUARDO CORRECTAMENTE!");
 		return "redirect:/views/productos/";
 	}
 	
 	@GetMapping("/edit/{id_Prod}")
-	public String editar(@PathVariable("id_Prod") int id, Model modelo)
+	public String editar(@PathVariable("id_Prod") int id, Model modelo, RedirectAttributes attribute)
 	{	
 		if(PRODSI.findById(id)==null)
 		{
-			System.out.println("ERROR CON EL ID DEL PRODUCTO");
+			attribute.addFlashAttribute("error", "ERROR: EL ID DEL PRODUCTO NO EXISTE!");
 			return "redirect:/views/productos/";
 		}
 		modelo.addAttribute("titulo","Formulario: Editar Producto");
 		modelo.addAttribute("producto",PRODSI.findById(id));
 		modelo.addAttribute("proveedoresList",PROVSI.All());
-		System.out.println("Producto editado con exito");
 		return "/views/productos/frmCrear";
 	}
 	
 	@GetMapping("/delete/{id_Prod}")
-	public String eliminar(@PathVariable("id_Prod") int id)
+	public String eliminar(@PathVariable("id_Prod") int id,RedirectAttributes attribute)
 	{	
 		if(PRODSI.findById(id)==null)
 		{
-			System.out.println("ERROR CON EL ID DEL PRODUCTO");
+			attribute.addFlashAttribute("error", "ERROR: EL ID DEL PRODUCTO NO EXISTE!");
 			return "redirect:/views/productos/";
 		}
 		PRODSI.delete(id);
-		System.out.println("Producto se elimino con exito");
+		attribute.addFlashAttribute("warning", "REGISTRO ELIMINADO CON EXITO!");
 		return "redirect:/views/productos/";
 	}
 	/*@PostMapping("/crear")

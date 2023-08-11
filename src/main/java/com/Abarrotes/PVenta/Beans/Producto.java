@@ -154,16 +154,11 @@ public class Producto
 		this.id_prov_Prod = id_prov_Prod;
 	}
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return "Producto [id_Prod=" + id_Prod + ", cve_Prod=" + cve_Prod + ", nom_Prod=" + nom_Prod + ", pre_Prod="
 				+ pre_Prod + ", inv_exi_Prod=" + inv_exi_Prod + ", inv_stock_Prod=" + inv_stock_Prod + ", prod_tot_Ven="
-				+ prod_tot_Ven + ", url_nom_Img=" + url_nom_Img + ", id_prov_Prod=" + id_prov_Prod + ", getId_Prod()="
-				+ getId_Prod() + ", getCve_Prod()=" + getCve_Prod() + ", getNom_Prod()=" + getNom_Prod()
-				+ ", getPre_Prod()=" + getPre_Prod() + ", getInv_exi_Prod()=" + getInv_exi_Prod()
-				+ ", getInv_stock_Prod()=" + getInv_stock_Prod() + ", getProd_tot_Ven()=" + getProd_tot_Ven()
-				+ ", getUrl_nom_Img()=" + getUrl_nom_Img() + ", getid_prov_Prod()=" + getId_prov_Prod() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ prod_tot_Ven + ", url_nom_Img=" + url_nom_Img + ", id_prov_Prod=" + id_prov_Prod + ", proveedor="
+				+ proveedor + "]";
 	}
 	
 	
