@@ -14,6 +14,7 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -37,37 +38,112 @@ public class ListarProductosPdf extends AbstractPdfView
 		PdfPCell celda =null;
 		
 		Font ftitulo = FontFactory.getFont("Hervetica",16);
-		Font fcol = FontFactory.getFont("Hervetica",14,Color.BLACK);
+		Font fcol = FontFactory.getFont("Hervetica",13,Color.BLACK);
+		Font fcel = FontFactory.getFont("Hervetica",8,Color.BLACK);
+		
 		celda = new PdfPCell(new Phrase("LISTADO GENERAL DE LOS PRODUCTOS",ftitulo));		
 		celda.setBorder(0);
 		celda.setBackgroundColor(new Color(40,190,138));
 		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-		celda.setPadding(20);
+		celda.setPadding(10);
 		
 		tablatitulo.addCell(celda);
 		tablatitulo.setSpacingAfter(30);
 		
 		PdfPTable COL = new PdfPTable(7);
-		COL.addCell(new PdfPCell(new Phrase("CLAVE",fcol)));
-		COL.addCell(new PdfPCell(new Phrase("NOMBRE",fcol)));
-		COL.addCell(new PdfPCell(new Phrase("PRECIO",fcol)));
-		COL.addCell(new PdfPCell(new Phrase("EXISTENCIAS",fcol)));
-		COL.addCell(new PdfPCell(new Phrase("REQUERIDAS",fcol)));
-		COL.addCell(new PdfPCell(new Phrase("VENDIDAS",fcol)));
-		COL.addCell(new PdfPCell(new Phrase("PROVEDOR",fcol)));
-	
+		
+		COL.setWidths(new float[] {1.5f, 3f, 1f, 1.2f, 1.2f, 1f,1.5f});
+		
+		celda = new PdfPCell(new Phrase("Clave",fcol));	
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("Nombre",fcol));
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_LEFT);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("Precio",fcol));	
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("Existencias",fcol));	
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("Requeridos",fcol));	
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("Vendidos",fcol));	
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("Proveedor",fcol));	
+		celda.setBackgroundColor(new Color(40,190,138));
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(7);
+		celda.setBorderWidth(2);
+		COL.addCell(celda);
+		
 		
 		
 		PdfPTable tabla = new PdfPTable(7);
+		tabla.setWidths(new float[] {1.5f, 3f, 1f, 1.2f, 1.2f, 1f,1.5f});
 		listaProductos.forEach(Producto ->
 		{
-			tabla.addCell(Producto.getCve_Prod()+"");
-			tabla.addCell(Producto.getNom_Prod());
-			tabla.addCell(Producto.getPre_Prod()+"");
-			tabla.addCell(Producto.getInv_exi_Prod()+"");
-			tabla.addCell(Producto.getInv_stock_Prod()+"");
-			tabla.addCell(Producto.getProd_tot_Ven()+"");
-			tabla.addCell(Producto.getProveedor().getNom_Prov());
+			PdfPCell celda2 =null;
+			celda2 = new PdfPCell(new Phrase(Producto.getCve_Prod()+"",fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
+			
+			celda2 = new PdfPCell(new Phrase(Producto.getNom_Prod(),fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_LEFT);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
+			
+			celda2 = new PdfPCell(new Phrase(Producto.getPre_Prod()+"",fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
+			
+			celda2 = new PdfPCell(new Phrase(Producto.getInv_exi_Prod()+"",fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
+			
+			celda2 = new PdfPCell(new Phrase(Producto.getInv_stock_Prod()+"",fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
+			
+			celda2 = new PdfPCell(new Phrase(Producto.getProd_tot_Ven()+"",fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
+
+			celda2 = new PdfPCell(new Phrase(Producto.getProveedor().getNom_Prov(),fcel));	
+			celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda2.setPadding(4);
+			tabla.addCell(celda2);
 		});
 		
 		document.add(tablatitulo);
