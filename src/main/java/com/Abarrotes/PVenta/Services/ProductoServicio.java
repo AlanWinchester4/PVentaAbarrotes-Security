@@ -6,7 +6,7 @@ import com.Abarrotes.PVenta.Beans.Producto;
 
 public interface ProductoServicio 
 {
-	public List<Producto> All();
+	public List<Producto> findAll();
 	
 	public Producto findById(Integer id);
 	
@@ -14,4 +14,5 @@ public interface ProductoServicio
 	
 	public void delete(Integer id);
 	
+	public List<Producto> findAllByNom(String nom);
 }

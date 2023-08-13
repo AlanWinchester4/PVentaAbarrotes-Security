@@ -16,8 +16,9 @@ public class ProductoServicioImpl implements ProductoServicio
 	
 
 	@Override
-	public List<Producto> All() 
+	public List<Producto> findAll() 
 	{
+		
 		return PR.findAll();
 	}
 
@@ -37,6 +38,12 @@ public class ProductoServicioImpl implements ProductoServicio
 	public void delete(Integer id) 
 	{
 		PR.deleteById(id);
+	}
+
+	@Override
+	public List<Producto> findAllByNom(String nom) 
+	{
+		return PR.findAll(nom);
 	}
 
 	

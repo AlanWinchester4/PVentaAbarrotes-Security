@@ -37,9 +37,10 @@ public class ProductoREST
 	private ProveedorServicioImpl PROVSI;
 	
 	@GetMapping("/")
-	public String todos(Model modelo)
+	public String todos(Model modelo, String nom_Prod)
 	{
-		List<Producto> lista = PRODSI.All();
+		List<Producto> lista = null;
+		lista = PRODSI.findAll();
 		modelo.addAttribute("productList",lista);
 		return "/views/productos/listar";
 	}
@@ -72,7 +73,7 @@ public class ProductoREST
 	{	
 		if(PRODSI.findById(id)==null)
 		{
-			attribute.addFlashAttribute("error", "ERROR: EL ID DEL PRODUCTO NO EXISTE!");
+			attribute.addFlashAttribute("danger", "ERROR: EL ID DEL PRODUCTO NO EXISTE!");
 			return "redirect:/views/productos/";
 		}
 		modelo.addAttribute("titulo","Formulario: Editar Producto");
@@ -91,6 +92,17 @@ public class ProductoREST
 		}
 		PRODSI.delete(id);
 		attribute.addFlashAttribute("warning", "REGISTRO ELIMINADO CON EXITO!");
+		return "redirect:/views/productos/";
+	}
+	@GetMapping("/search/{nom_Prod}")
+	public String buscarPorNombre(@PathVariable("nom_Prod") String nombre,Model modelo,RedirectAttributes attribute)
+	{
+		if(PRODSI.findAllByNom(nombre) ==null)
+		{
+			modelo.addAttribute("productList",PRODSI.findAllByNom(nombre));
+			return "/views/productos/listar";
+		}
+		attribute.addFlashAttribute("warning", "EL PRODUCTO BUSCADO NO EXISTE!");
 		return "redirect:/views/productos/";
 	}
 	/*@PostMapping("/crear")

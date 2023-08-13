@@ -22,7 +22,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Component("/views/productos/listar")
+@Component("/views/productos/listar.pdf")
 public class ListarProductosPdf extends AbstractPdfView
 {
 	@Override
