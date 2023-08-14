@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -104,11 +104,14 @@
 				</tr>
 				<tr th:each="product,iterStat : ${productList}">
 
-					<td><img
-						th:src="@{/images/Productos/{img} (img=${product.getUrl_nom_Img()})}"
+					<td >
+					<img
+						th:src="@{/recursos/{img} (img=${product.getUrl_nom_Img()})}"
 						width="70" height="70"></td>
 					<td th:text="${product.getCve_Prod()}"></td>
-					<td th:text="${product.getNom_Prod()}"></td>
+					<td >
+					<a th:href="@{/views/productos/detalle/}+${product.getId_Prod()}"th:text="${product.getNom_Prod()}"></a>
+					</td>
 					<td th:text="${product.getPre_Prod()}"></td>
 					<td th:text="${product.getInv_exi_Prod()}"></td>
 					<td th:text="${product.getInv_stock_Prod()}"></td>

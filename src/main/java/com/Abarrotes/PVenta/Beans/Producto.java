@@ -22,8 +22,8 @@ public class Producto
 	@Column (name = "id_Prod")
 	private int id_Prod;
 	@Column (name = "cve_Prod")
-	@NotNull
-	private int cve_Prod;
+	@NotEmpty
+	private String cve_Prod;
 	@Column (name = "nom_Prod")
 	@NotEmpty
 	private String nom_Prod;
@@ -64,7 +64,7 @@ public class Producto
 	 * @param inv_stock_Prod
 	 * @param prod_tot_Ven
 	 */
-	public Producto(int id_Prod, int cve_Prod, String nom_Prod, float pre_Prod, int inv_exi_Prod, int inv_stock_Prod,
+	public Producto(int id_Prod, String cve_Prod, String nom_Prod, float pre_Prod, int inv_exi_Prod, int inv_stock_Prod,
 			int prod_tot_Ven, String url_nom_Img, int id_prov_Prod) 
 	{
 		this.id_Prod = id_Prod;
@@ -89,11 +89,11 @@ public class Producto
 	{
 		this.id_Prod = id_Prod;
 	}
-	public int getCve_Prod() 
+	public String getCve_Prod() 
 	{
 		return cve_Prod;
 	}
-	public void setCve_Prod(int cve_Prod) 
+	public void setCve_Prod(String cve_Prod) 
 	{
 		this.cve_Prod = cve_Prod;
 	}
