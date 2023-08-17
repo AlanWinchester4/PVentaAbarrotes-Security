@@ -39,7 +39,7 @@ public class Producto
 	@Column (name = "prod_tot_Ven")
 	private int prod_tot_Ven;
 	@Column (name = "url_nom_Img")
-	private String url_nom_Img;
+	private String url_nom_Img = "sin-imagen.jpg";
 	@Column (name = "id_prov_Prod")
 	private int id_prov_Prod;
 	@ManyToOne(optional=false)

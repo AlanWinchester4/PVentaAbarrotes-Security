@@ -65,17 +65,30 @@
 		</header>
 	<div class="container">
 		<div class="card bg-light">
-			<div class="card-head bg-dark text-white text-center text-uppercase" th:text="${titulo}"></div>
+			<div class="card-head bg-dark text-white text-center text-uppercase" th:text="${titulo}">
+			</div>
 			<div class="card-body">
+				<div class="row ">
+				<div class="col-4 text-center">
 				<img class="img-thumbnail rounded float-left"
 				th:src="@{'/recursos/' + ${producto.getUrl_nom_Img()}}"
 				th:alt="${producto.getUrl_nom_Img()}"
-				style="max-width:15%;">
+				style="max-width:80%;">
+				</div>
+				<div class="col-6">
 				<ul class="list-group">
-					<li class="list-group-item" th:text="'CLAVE DEL PRODUCTO: '+ ${producto.getCve_Prod()}">
-					<li class="list-group-item" th:text="'NOMBRE DEL PRODUCTO: '+ ${producto.getNom_Prod()}">
-					<li class="list-group-item" th:text="'PRECIO DEL PRODUCTO: '+ ${producto.getPre_Prod()}">
+					<li class="list-group-item" th:text="'CLAVE: '+ ${producto.getCve_Prod()}">
+					<li class="list-group-item" th:text="'NOMBRE: '+ ${producto.getNom_Prod()}">
+					<li class="list-group-item" th:text="'PRECIO: '+ ${producto.getPre_Prod()}">
+					<li class="list-group-item" th:text="'EXISTENCIAS: '+ ${producto.getInv_exi_Prod()}">
+					<li class="list-group-item" th:text="'REQUERIDO: '+ ${producto.getInv_stock_Prod()}">				
+					<li class="list-group-item" th:text="'VENTAS: '+ ${producto.getProd_tot_Ven()}">
+					<li class="list-group-item" th:text="'PROVEEDOR: '+ ${producto.getProveedor.getNom_Prov()}">
+					
+				
 				</ul>
+				</div>
+				</div>
 			</div>
 			<br>
 				<button class="btn btn-success" onclick="goBack()">&laquo;Regresar</button>

@@ -116,7 +116,7 @@
 					<td th:text="${product.getInv_exi_Prod()}"></td>
 					<td th:text="${product.getInv_stock_Prod()}"></td>
 					<td th:text="${product.getProd_tot_Ven()}"></td>
-					<td th:text="${product.proveedor.nom_Prov}"></td>
+					<td th:text="${product.getProveedor().getNom_Prov()}"></td>
 					<td><a class="btn btn-success btn-sm"
 						th:href="@{/views/productos/edit/} + ${product.getId_Prod()}"
 						th:text="'Editar'" title="Editar Registro"></a></td>

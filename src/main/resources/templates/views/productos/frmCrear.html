@@ -65,48 +65,51 @@
 		</header>
 	<div class="container">
 		<div class="card bg-light">
-			<div class="card-head bg-dark text-white" th:text="${titulo}"></div>
+			<div class="card-head bg-dark text-white text-center text-uppercase" th:text="${titulo}"></div>
 			<div class="card-body">
+			<form th:action="@{/views/productos/save}" th:object="${producto}"	method="post" enctype="multipart/form-data">
+			<div class="row">
+			<div class="col-4 text-center">
 				<img class="img-thumbnail rounded float-left"
 				th:src="@{'/recursos/' + ${producto.getUrl_nom_Img()}}"
 				th:alt="${producto.getUrl_nom_Img()}"
-				style="max-width:15%;">
-				<form th:action="@{/views/productos/save}" th:object="${producto}"	method="post" enctype="multipart/form-data">
-					<div class="mb-3 row">							
+				style="max-width:90%;">
+			</div>
+			<div class="col">
+					<div class="mb-2 row">							
 					<input type="hidden" th:field="*{id_Prod}">
-
 						<label for="clave" class="col-sm-2 col-form-label">CLAVE:</label>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<input type="text"  class="form-control"  th:field="*{cve_Prod}"
-								id="cve_Prod" placeholder="CLAVE DEL PRODUCTO">
+								id="cve_Prod" placeholder="CLAVE">
 								<small class="form-text text-danger" th:if="${#fields.hasErrors('cve_Prod')}" th:errors="*{cve_Prod}"></small>
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<div class="mb-2 row">
 						<label for="nombre" class="col-sm-2 col-form-label">NOMBRE:</label>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<input type="text" class="form-control"  th:field="*{nom_Prod}"
 								id="nom_Prod" placeholder="NOMBRE DEL PRODUCTO">
 								<small class="form-text text-danger" th:if="${#fields.hasErrors('nom_Prod')}" th:errors="*{nom_Prod}"></small>
 
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<div class="mb-2 row">
 						<label for="precio" class="col-sm-2 col-form-label">PRECIO:</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<input type="text"class="form-control"  th:field="*{pre_Prod}"
-								id="pre_Prod" placeholder="PRECIO DEL PRODUCTO">
+								id="pre_Prod" placeholder="PRECIO">
 								<small class="form-text text-danger" th:if="${#fields.hasErrors('pre_Prod')}" th:errors="*{pre_Prod}"></small>						
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<div class="mb-2 row">
 						<label for="existencias" class="col-sm-2 col-form-label">EXISTENCIAS:</label>
 						<div class="col-sm-2">
 							<input type="text" class="form-control" id="inv_exi_Prod"  th:field="*{inv_exi_Prod}">
 								<small class="form-text text-danger" th:if="${#fields.hasErrors('inv_exi_Prod')}" th:errors="*{inv_exi_Prod}"></small>												
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<div class="mb-2 row">
 						<label for="necesarias" class="col-sm-2 col-form-label">REQUERIDO:</label>
 						<div class="col-sm-2">
 							<input type="text" class="form-control" id="inv_stock_Prod"  th:field="*{inv_stock_Prod}">
@@ -114,24 +117,26 @@
 						</div>
 					</div>
 
-					<div class="mb-3 row">
+					<div class="mb-2 row">
 						<label for="proveedor" class="col-sm-2 col-form-label">PROVEEDOR:</label>
-						<div class="col-sm-3">
-							<select class="form-control form-control-sm col-md-6" th:field="*{id_prov_Prod}"
+						<div class="col-sm-4">
+							<select class="form-control col-md-6" th:field="*{id_prov_Prod}"
 								id="url_nom_img">
 								<option th:each="p: ${proveedoresList}"
 									th:value="${p.getId_Prov()}" th:text="${p.getNom_Prov()}" />
 							</select>
 						</div>
 					</div> 
-					<div class="mb-3 row">
-						<div class="col-sm-4">
-							<input type="file" name="file" class="form-control form-control-sm col-md-8"
+					<div class="mb-2 row">
+						<div class="col-sm-8">
+							<input type="file" name="file" class="form-control col-md-8"
 								id="url_nom_img">
 						</div>
 					</div>
-					<div class="card-footer bg-dark">
-						<input type="submit" class="btn btn-primary btn-sm"
+					</div>
+					</div>
+					<div class="card-footer bg-dark text-center">
+						<input type="submit" class="btn btn-primary "
 							value="Guardar">
 					</div>
 				</form>
