@@ -10,4 +10,6 @@ public abstract interface UsuarioRepository extends JpaRepository<Usuario, Integ
 {
 	@Query("SELECT u FROM Usuario u WHERE u.nom_user Like %?1%")
 	public List<Usuario> findAll(String nom_user);
+	@Query("SELECT u FROM Usuario u WHERE u.nom_user Like %?1%")
+	public Usuario findByNom(String nom_user);
 }

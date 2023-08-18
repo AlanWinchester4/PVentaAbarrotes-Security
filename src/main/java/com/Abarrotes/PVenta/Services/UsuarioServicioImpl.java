@@ -43,4 +43,11 @@ public class UsuarioServicioImpl implements UsuarioServicio
 		return UR.findAll(nom);
 	}
 
+	@Override
+	public Usuario findByNom(String nom) 
+	{
+		
+		return UR.findByNom(nom);
+	}
+
 }

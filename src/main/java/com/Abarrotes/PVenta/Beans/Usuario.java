@@ -1,9 +1,12 @@
 package com.Abarrotes.PVenta.Beans;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,11 +15,29 @@ public class Usuario
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id_user;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id_user" ,referencedColumnName="user_id",insertable=false, updatable=false)
+	private Rol rol;
+	
+	public Rol getRol() 
+	{
+		return rol;
+	}
+	public void setRol(Rol rol) 
+	{
+		this.rol = rol;
+	}
+	
+	@Column(name="nom_user")
 	private String nom_user;
+	@Column(name="pass_user")
 	private String pass_user;
+	@Column(name="enabled")
 	private int enabled;
-
+	
+	
 	public Usuario(int id_user, String nom_user, String pass_user, int enabled) 
 	{
 		this.id_user = id_user;

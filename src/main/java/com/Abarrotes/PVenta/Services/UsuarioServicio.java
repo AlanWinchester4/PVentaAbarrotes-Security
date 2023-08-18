@@ -10,6 +10,8 @@ public interface UsuarioServicio
 	
 	public Usuario findById(Integer id);
 	
+	public Usuario findByNom(String nom);
+	
 	public void save(Usuario usuario);
 	
 	public void delete(Integer id);
